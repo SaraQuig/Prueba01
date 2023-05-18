@@ -1,0 +1,44 @@
+-- Database: db_producto
+
+-- DROP DATABASE IF EXISTS db_producto;
+
+CREATE DATABASE db_producto
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Spanish_Spain.1252'
+    LC_CTYPE = 'Spanish_Spain.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+	
+	SELECT * FROM tb_perfil;
+	SELECT * FROM tb_usuarios;
+	
+	SELECT * FROM tb_producto;
+	select * from tb_pagina;
+	
+--Modificanciones hechas en la base de datos
+ALTER TABLE tb_producto
+ADD COLUMN en_oferta BOOLEAN DEFAULT false,
+ADD COLUMN precio_oferta DECIMAL(10,2) DEFAULT 0.0;
+
+SELECT id_pr, descripcion_pr, precio_pr, en_oferta, precio_oferta
+FROM tb_producto
+WHERE en_oferta = true;
+
+
+CREATE TABLE tb_usuarios (
+  id_us INT,
+  id_per INT,
+  nombre_us TEXT,
+  direccion_us TEXT,
+  login_us TEXT,
+  clave_us TEXT,
+	clave_nueva TEXT,
+  PRIMARY KEY (id_us),
+  FOREIGN KEY (id_per) REFERENCES tb_perfil(id_per)
+);
+
+
+
